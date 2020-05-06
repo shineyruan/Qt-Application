@@ -1,27 +1,27 @@
-#include "notepad.h"
+#include "textfinder.h"
 
 #include <QFile>
 #include <QTextStream>
 #include <fstream>
 
-#include "ui_notepad.h"
+#include "ui_textfinder.h"
 
-Notepad::Notepad(QWidget *parent)
-    : QWidget(parent), ui(new Ui::Notepad) {
+TextFinder::TextFinder(QWidget *parent)
+    : QWidget(parent), ui(new Ui::TextFinder) {
     ui->setupUi(this);
     loadText();
 }
 
-Notepad::~Notepad() {
+TextFinder::~TextFinder() {
     delete ui;
 }
 
-void Notepad::on_findButton_clicked() {
+void TextFinder::on_findButton_clicked() {
     QString searchStr = ui->lineEdit->text();
     ui->textEdit->find(searchStr, QTextDocument::FindWholeWords);
 }
 
-void Notepad::loadText() {
+void TextFinder::loadText() {
     QFile input_file(":/input.txt");
     input_file.open(QIODevice::ReadOnly);
 

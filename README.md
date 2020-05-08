@@ -16,5 +16,5 @@ Requires Qt 5.14.2 (Mingw-w64 on Windows, gcc on Mac/Linux). Tested only in Wind
   - Open a terminal and navigate to the project directory.
   - Type in the following command:
     - `mkdir build && cd build`
-    - `qmake ../<project_name>.pro && make`
+    - `qmake .. && make`
     - `./<project_name>`

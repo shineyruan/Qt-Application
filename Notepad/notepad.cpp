@@ -53,3 +53,19 @@ void Notepad::on_actionSave_triggered() {
     out << text;
     file.close();
 }
+
+void Notepad::on_actionSave_As_triggered() {
+    QString fileName = QFileDialog::getSaveFileName(this, "Save as");
+    currentFileName = fileName;
+
+    QFile file(fileName);
+    if (!file.open(QIODevice::WriteOnly | QFile::Text)) {
+        QMessageBox::warning(this, "Warning", "Cannot save file: " + file.errorString());
+        return;
+    }
+
+    setWindowTitle(fileName);
+    QTextStream out(&file);
+    out << ui->textEdit->toPlainText();
+    file.close();
+}

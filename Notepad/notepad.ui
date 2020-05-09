@@ -47,6 +47,8 @@
                 <addaction name="actionOpen"/>
                 <addaction name="actionSave"/>
                 <addaction name="actionSave_As"/>
+                <addaction name="separator"/>
+                <addaction name="actionChange_Font"/>
             </widget>
             <addaction name="menuFile"/>
         </widget>
@@ -69,6 +71,11 @@
         <action name="actionNew">
             <property name="text">
                 <string>New</string>
+            </property>
+        </action>
+        <action name="actionChange_Font">
+            <property name="text">
+                <string>Change Font...</string>
             </property>
         </action>
     </widget>

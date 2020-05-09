@@ -2,6 +2,8 @@
 
 #include <QFile>
 #include <QFileDialog>
+#include <QFont>
+#include <QFontDialog>
 #include <QMessageBox>
 #include <QTextStream>
 
@@ -89,5 +91,13 @@ void Notepad::on_textEdit_textChanged() {
     if (!textChanged) {
         textChanged = true;
         setWindowTitle(windowTitle().append("*"));
+    }
+}
+
+void Notepad::on_actionChange_Font_triggered() {
+    bool fontSelected;
+    QFont font = QFontDialog::getFont(&fontSelected, this);
+    if (fontSelected) {
+        ui->textEdit->setFont(font);
     }
 }

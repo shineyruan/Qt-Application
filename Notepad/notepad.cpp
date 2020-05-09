@@ -10,6 +10,7 @@
 Notepad::Notepad(QWidget *parent)
     : QMainWindow(parent), ui(new Ui::Notepad) {
     ui->setupUi(this);
+    textChanged = false;
 }
 
 Notepad::~Notepad() {
@@ -52,6 +53,8 @@ void Notepad::on_actionSave_triggered() {
     QString text = ui->textEdit->toPlainText();
     out << text;
     file.close();
+
+    textChanged = false;
 }
 
 void Notepad::on_actionSave_As_triggered() {
@@ -68,4 +71,23 @@ void Notepad::on_actionSave_As_triggered() {
     QTextStream out(&file);
     out << ui->textEdit->toPlainText();
     file.close();
+
+    textChanged = false;
+}
+
+void Notepad::on_actionNew_triggered() {
+    currentFileName.clear();
+    if (!ui->textEdit->toPlainText().isEmpty()) {
+        // if there is no text, no need to trigger text change
+        // by resetting with an empty string
+        ui->textEdit->setText(QString());
+    }
+    setWindowTitle("Notepad");
+}
+
+void Notepad::on_textEdit_textChanged() {
+    if (!textChanged) {
+        textChanged = true;
+        setWindowTitle(windowTitle().append("*"));
+    }
 }

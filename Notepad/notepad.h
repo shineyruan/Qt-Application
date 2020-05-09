@@ -23,8 +23,13 @@ private slots:
 
     void on_actionSave_As_triggered();
 
+    void on_actionNew_triggered();
+
+    void on_textEdit_textChanged();
+
 private:
     Ui::Notepad *ui;
     QString currentFileName;
+    bool textChanged;
 };
 #endif  // NOTEPAD_H

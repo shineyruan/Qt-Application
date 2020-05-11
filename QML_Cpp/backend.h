@@ -3,6 +3,7 @@
 
 #include <QObject>
 #include <QString>
+#include <QVector>
 
 class BackEnd : public QObject {
 private:
@@ -22,7 +23,8 @@ signals:
 
 private:
     QString m_userName;
-    QString m_prevUserName;
+    QVector<QString> m_prevUserNames;
+    int n_prevUserName;
 };
 
 #endif  // BACKEND_H

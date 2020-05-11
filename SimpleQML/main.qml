@@ -1,6 +1,7 @@
 import QtQuick 2.12
 import QtQuick.Window 2.12
 import QtQuick.Layouts 1.0
+import QtQuick.Controls 2.0
 
 Window {
     visible: true
@@ -12,23 +13,12 @@ Window {
 
     ColumnLayout {
         x: 109
-        y: 141
-
-        TextInput {
-            id: myTextInput
-            text: "Hello World!"  // a basic greeting
-            Layout.preferredHeight: 74
-            Layout.preferredWidth: 423
-            verticalAlignment: Text.AlignVCenter
-            horizontalAlignment: Text.AlignHCenter
-            font.capitalization: Font.MixedCase
-            font.pointSize: 28
-        }
+        y: 158
 
         Text {
             id: showText
             color: "#122fba"
-            text: qsTr(myTextInput.text)
+            text: qsTr("Waiting for click...")
             Layout.preferredHeight: 117
             Layout.preferredWidth: 423
             fontSizeMode: Text.Fit
@@ -36,19 +26,27 @@ Window {
             horizontalAlignment: Text.AlignHCenter
             font.pixelSize: 32
         }
-    }
-    Rectangle {
-        id: background
-        x: 0
-        y: 0
-        color: "#48cbe2"
-        Layout.preferredHeight: 480
-        Layout.preferredWidth: 640
-        border.width: 5
 
-        gradient: Gradient {
-            GradientStop { position: 0.0; color: "yellow" }
-            GradientStop { position: 1.0; color: "green" }
+        Button {
+            id: echoButton
+            text: "echo \"Hello World\""
+            Layout.preferredHeight: 40
+            Layout.preferredWidth: 423
+
+            onClicked: {
+                showText.text = "Hello World!"
+            }
+
+        }
+
+        Button {
+            id: clearButton
+            text: "clear"
+            Layout.fillWidth: true
+
+            onClicked: {
+                showText.text = "Waiting for click..."
+            }
         }
     }
 }

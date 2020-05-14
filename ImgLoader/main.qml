@@ -2,6 +2,7 @@ import QtQuick 2.12
 import QtQuick.Window 2.12
 import QtQuick.Controls 2.12
 import QtQuick.Layouts 1.0
+import QtQuick.Dialogs 1.0
 
 Window {
     id: root
@@ -11,15 +12,36 @@ Window {
     title: qsTr("Image Loader")
 
     ColumnLayout {
+        id: columnLayout
         x: 0
         y: 0
         anchors.fill: parent
+        property var imageURL: ""
+
+        FileDialog {
+            id: fileDialog
+            title: "Select an image..."
+            nameFilters: ["Image files (*.png, *.jpg)", "All files (*)"]
+            selectedNameFilter: "Image files (*.png, *.jpg)"
+            sidebarVisible: true
+            onAccepted: {
+                columnLayout.imageURL = fileUrl
+                console.log("Chosen image: " + columnLayout.imageURL)
+            }
+        }
 
         MenuBar {
+            id: menuBar
+            Layout.fillWidth: true
             Menu {
                 visible: false
                 title: qsTr("File")
-                Action { text: qsTr("Open...") }
+                Action {
+                    text: qsTr("Open...")
+                    onTriggered: {
+                        fileDialog.open()
+                    }
+                }
                 Action { text: qsTr("Save...") }
                 MenuSeparator {}
                 Action {
@@ -71,7 +93,7 @@ Window {
             Layout.fillHeight: true
             Layout.fillWidth: true
             Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
-            source: "qrc:/images/sample.png"
+            source: columnLayout.imageURL
             fillMode: Image.PreserveAspectFit
         }
     }

@@ -21,8 +21,8 @@ Window {
         FileDialog {
             id: fileDialog
             title: "Select an image..."
-            nameFilters: ["Image files (*.png, *.jpg)", "All files (*)"]
-            selectedNameFilter: "Image files (*.png, *.jpg)"
+            nameFilters: ["Image files (*.png *.jpg)", "All files (*)"]
+            selectedNameFilter: "Image files (*.png *.jpg)"
             sidebarVisible: true
             onAccepted: {
                 columnLayout.imageURL = fileUrl

@@ -17,6 +17,19 @@ Window {
         id: backendProcessor
     }
 
+    FileDialog {
+        id: fileDialog
+        title: "Select an image..."
+        nameFilters: ["Image files (*.png *.jpg)", "All files (*)"]
+        selectedNameFilter: "Image files (*.png *.jpg)"
+        sidebarVisible: true
+        onAccepted: {
+            columnLayout.imageURL = fileUrl
+            console.log("Chosen image: " + columnLayout.imageURL)
+            backendProcessor.saveImage(columnLayout.imageURL)
+        }
+    }
+
     ColumnLayout {
         id: columnLayout
         x: 0
@@ -25,23 +38,6 @@ Window {
         property var imageURL: ""
         property var mouseXPos: 0.0
         property var mouseYPos: 0.0
-
-        FileDialog {
-            id: fileDialog
-            title: "Select an image..."
-            nameFilters: ["Image files (*.png *.jpg)", "All files (*)"]
-            selectedNameFilter: "Image files (*.png *.jpg)"
-            sidebarVisible: true
-            onAccepted: {
-                columnLayout.imageURL = fileUrl
-                console.log("Chosen image: " + columnLayout.imageURL)
-
-                img.grabToImage(function(result) {
-                    backendProcessor.setImage(result);
-                });
-            }
-        }
-
 
         MenuBar {
             id: menuBar

@@ -1,10 +1,14 @@
 #include <QGuiApplication>
 #include <QQmlApplicationEngine>
 
+#include "processor.h"
+
 int main(int argc, char *argv[]) {
     QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
 
     QGuiApplication app(argc, argv);
+
+    qmlRegisterType<Processor>("io.my.image", 1, 0, "ImageProcessor");
 
     QQmlApplicationEngine engine;
     const QUrl url(QStringLiteral("qrc:/main.qml"));

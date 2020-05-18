@@ -1,14 +1,14 @@
-#include <QGuiApplication>
-#include <QQmlApplicationEngine>
+#include <QtGui/QGuiApplication>
+#include <QtQml/QQmlApplicationEngine>
 
-#include "processor.h"
+#include "loader.h"
 
 int main(int argc, char *argv[]) {
     QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
 
     QGuiApplication app(argc, argv);
 
-    qmlRegisterType<Processor>("io.my.image", 1, 0, "ImageProcessor");
+    qmlRegisterType<ImgLoader>("com.images", 1, 0, "ImgLoader");
 
     QQmlApplicationEngine engine;
     const QUrl url(QStringLiteral("qrc:/main.qml"));

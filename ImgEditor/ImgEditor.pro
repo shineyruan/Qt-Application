@@ -1,4 +1,4 @@
-QT += quick
+QT += quick qml core gui
 
 CONFIG += c++11
 
@@ -15,7 +15,7 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 SOURCES += \
         main.cpp \
-        processor.cpp
+        loader.cpp
 
 RESOURCES += qml.qrc
 
@@ -31,4 +31,4 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
 
 HEADERS += \
-    processor.h
+    loader.h

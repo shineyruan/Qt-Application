@@ -4,7 +4,7 @@ import QtQuick.Controls 2.12
 import QtQuick.Layouts 1.0
 import QtQuick.Dialogs 1.0
 
-import io.my.image 1.0
+import com.images 1.0
 
 Window {
     id: root
@@ -13,8 +13,8 @@ Window {
     height: 480
     title: qsTr("Image Loader")
 
-    ImageProcessor {
-        id: backendProcessor
+    ImgLoader {
+        id: loader
     }
 
     FileDialog {
@@ -24,9 +24,9 @@ Window {
         selectedNameFilter: "Image files (*.png *.jpg)"
         sidebarVisible: true
         onAccepted: {
-            columnLayout.imageURL = fileUrl
-            console.log("Chosen image: " + columnLayout.imageURL)
-            backendProcessor.saveImage(columnLayout.imageURL)
+            imageURL = fileUrl
+            console.log("Chosen image: " + imageURL)
+            loader.loadImage(imageURL)
         }
     }
 
@@ -35,9 +35,6 @@ Window {
         x: 0
         y: 0
         anchors.fill: parent
-        property var imageURL: ""
-        property var mouseXPos: 0.0
-        property var mouseYPos: 0.0
 
         MenuBar {
             id: menuBar
@@ -103,18 +100,18 @@ Window {
             Layout.fillHeight: true
             Layout.fillWidth: true
             Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
-            source: columnLayout.imageURL
+            source: imageURL
             fillMode: Image.PreserveAspectCrop
 
             MouseArea {
                 anchors.fill: parent
                 hoverEnabled: true
                 onClicked: {
-                    console.log("Mouse clicked " + mouseY + "," + mouseX)
+                    loader.setMousePos(mouseXposPixel, mouseYPosPixel)
                 }
                 onPositionChanged: {
-                    columnLayout.mouseXPos = mouseX
-                    columnLayout.mouseYPos = mouseY
+                    mouseXPos = mouseX
+                    mouseYPos = mouseY
                 }
             }
         }
@@ -123,17 +120,20 @@ Window {
             Layout.fillWidth: true
 
             Label {
-                text: qsTr("Mouse position: " +
-                           columnLayout.mouseYPos * img.sourceSize.height / img.paintedHeight +
-                           ", " +
-                           columnLayout.mouseXPos * img.sourceSize.width / img.paintedWidth)
+                text: qsTr("Mouse position: " + mouseXposPixel + ", " + mouseYPosPixel)
             }
 
             Label {
-                text: qsTr("Image size: " + img.sourceSize.height + "x" + img.sourceSize.width)
+                text: qsTr("Image size: " + img.sourceSize.width + "x" + img.sourceSize.height)
             }
         }
     }
+
+    property var imageURL: ""
+    property var mouseXPos: 0.0
+    property var mouseYPos: 0.0
+    property var mouseXposPixel: Math.round(mouseXPos * img.sourceSize.width / img.paintedWidth)
+    property var mouseYPosPixel: Math.round(mouseYPos * img.sourceSize.height / img.paintedHeight)
 }
 
 

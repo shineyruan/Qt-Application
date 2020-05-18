@@ -124,13 +124,13 @@ Window {
 
             Label {
                 text: qsTr("Mouse position: " +
-                           columnLayout.mouseYPos * image.sourceSize.height / image.paintedHeight +
+                           columnLayout.mouseYPos * img.sourceSize.height / img.paintedHeight +
                            ", " +
-                           columnLayout.mouseXPos * image.sourceSize.width / image.paintedWidth)
+                           columnLayout.mouseXPos * img.sourceSize.width / img.paintedWidth)
             }
 
             Label {
-                text: qsTr("Image size: " + image.sourceSize.height + "x" + image.sourceSize.width)
+                text: qsTr("Image size: " + img.sourceSize.height + "x" + img.sourceSize.width)
             }
         }
     }
